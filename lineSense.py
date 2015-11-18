@@ -81,9 +81,9 @@ while True:
         #        print "trim_pot_changed", trim_pot_changed
  
        # if ( trim_pot_changed ):
-        v = trim_pot / 1024           # convert 10bit adc0 (0-1024) trim pot read into 0-100 volume level
+        v = trim_pot         # convert 10bit adc0 (0-1024) trim pot read into 0-100 volume level
         if v<50:
-            return 1
+		print "1"
         #set_volume = round(set_volume)          # round out decimal value
         #set_volume = int(trim_pot)            # cast volume as integer
         #voltage = (set_volume*3.3)/1024
