@@ -10,27 +10,27 @@ from shortrangemethod import rngsens
 motormove('w', 4)
 
 while(True):
-	if(1==check1):
+	if(1==check1()):
 		motormove('x')
 		time.sleep(1)
 		motormove('s',4)
-	elif(1==check2):
+	elif(1==check2()):
 		motormove('x')
 		time.sleep(1)
 		motormove('s',4)
-	elif(1==check3):
+	elif(1==check3()):
 		motormove('x')
 		time.sleep(1)
 		motormove('s',4)
-	elif(1==check4):
+	elif(1==check4()):
 		motormove('x')
 		time.sleep(1)
 		motormove('s',4)
-	elif(rngsens<3):
+	elif(rngsens()<3):
 		motormove('x')
 		time.sleep(1)
 		motormove('w',4)
-	elif(rngsens<20):
+	elif(rngsens()<20):
 		motormove('x')
 		time.sleep(1)
 		motormove('w',4)
