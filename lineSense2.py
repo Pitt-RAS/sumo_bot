@@ -126,7 +126,7 @@ class lineSense:
       GPIO.setup(SPICS, GPIO.OUT)
        
       # 10k trim pot connected to adc #0
-      potentiometer_adc = 3
+      potentiometer_adc = 4
       reading = 0
       done = 0
       i = 0
