@@ -1,36 +1,45 @@
 import time
-from lineSense2 import check1
-from lineSense2 import check2
-from lineSense2 import check3
-from lineSense2 import check4
-from minisumo_motorcontrol2 import motormove
-from longrangemethod import rangesens
-from shortrangemethod import rngsens
+from lineSense2 import lineSensor_Class 
+from minisumo_motorcontrol2 import Motors_Class
+from longrangemethod import longrange_Class
+from shortrangemethod import shortrange_Class
+lineSensors= lineSensor_Class()
+motors= Motors_Class()
+longrange= longrange_Class()
+shortrange= shortrange_Class()
 
-motormove('w', 4)
+motors.motor_move("w",4)
 
 while(True):
-	if(1==check1()):
-		motormove('x')
+	if(1==lineSensors.check1()):
+		motors.motor_move("x",0)
 		time.sleep(1)
-		motormove('s',4)
-	elif(1==check2()):
-		motormove('x')
+		motors.motor_move("s",4)
+	elif(1==lineSensors.check2()):
+		motors.motor_move('x',0)
 		time.sleep(1)
-		motormove('s',4)
-	elif(1==check3()):
-		motormove('x')
+		motors.motor_move('s',4)
+	elif(1==lineSensors.check3()):
+		motors.motor_move('x',0)
 		time.sleep(1)
-		motormove('s',4)
-	elif(1==check4()):
-		motormove('x')
+		motors.motor_move('s',4)
+	elif(1==lineSensors.check4()):
+		motors.motor_move('x',0)
 		time.sleep(1)
-		motormove('s',4)
-	elif(rngsens()<3):
-		motormove('x')
+		motors.motor_move('s',4)
+	elif(shortrange.rngsens()>3):
+		motors.motor_move('x',0)
 		time.sleep(1)
-		motormove('w',4)
-	elif(rngsens()<20):
-		motormove('x')
+		motors.motor_move('w',4)
+	elif(shortrange.rngsens()<20):
+		motors.motor_move('x',0)
 		time.sleep(1)
-		motormove('w',4)
+		motors.motor_move('w',4)
+	elif(longrange.rangesens()>15):
+		motors.motor_move('x', 0)
+		time.sleep(1)
+		motors.motor_move('w', 4)
+	elif(longrange.rangesens()<75):
+		motors.motor_move('x', 0)
+		time.sleep(1)
+		motors.motor_move('w', 0)
