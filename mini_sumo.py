@@ -137,3 +137,15 @@ while True:
 						degrees+=10
 					break 
 	lines = checkLines()
+		
+		
+			
+			
+
+		
+		
+				
+				
+		
+	
+		
