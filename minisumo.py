@@ -1,6 +1,11 @@
+# 
+#Need to make this file use the same objects like test.py
+#use from lineSense2 import lineSensor_Class not the execfile()
+#
 import time
 
 #load files
+
 execfile("lineSense2.py")
 execfile("longrangemethod.py")
 execfile("minisumo.py")
