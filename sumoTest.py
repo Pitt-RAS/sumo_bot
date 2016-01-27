@@ -11,9 +11,9 @@ shortrange= shortrange_Class()
 
 short = shortrange.rngsens
 long = longrange.rangesens
-l1 = lineSensors.check1()
-l2 = lineSensors.check2()
-l3 = lineSensors.check3()
+# l1 = lineSensors.check1()
+# l2 = lineSensors.check2()
+# l3 = lineSensors.check3()
 l4 = lineSensors.check4()
 ax, ay, vx, vy, r_mx, r_my = Adafruit_LSM303.mat_accel()
 
@@ -53,28 +53,28 @@ else:
 	print('long = ', long)
 	
 #line sensors
-print('\nTESTING LINE SENSORS')
-pressToContinue()
-print('place left corner over line')
-pressToContinue()
-if (l1 == 1):
-	print('\nL1 NOT WORKING')
-else:
-	print ('l1 working')
-print('\nPlace top right corner on line')
-pressToContinue()
-if (l2 == 1):
-	print('\nL2 NOT WORKING')
-else:
-	print ('l2 working')
-print('place bL corner on line')
-pressToContinue()
-if (l3 == 1):
-	print('\nL3 NOT WORKING')
-else:
-	print ('l3 working')
-print('place br corner on line')
-pressToContinue()
+# print('\nTESTING LINE SENSORS')
+# pressToContinue()
+# print('place left corner over line')
+# pressToContinue()
+# if (l1 == 1):
+	# print('\nL1 NOT WORKING')
+# else:
+	# print ('l1 working')
+# print('\nPlace top right corner on line')
+# pressToContinue()
+# if (l2 == 1):
+	# print('\nL2 NOT WORKING')
+# else:
+	# print ('l2 working')
+# print('place bL corner on line')
+# pressToContinue()
+# if (l3 == 1):
+	# print('\nL3 NOT WORKING')
+# else:
+	# print ('l3 working')
+# print('place br corner on line')
+# pressToContinue()
 if (l4 == 1):
 	print('\nL4 NOT WORKING')
 else:
