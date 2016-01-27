@@ -15,7 +15,7 @@ long = longrange.rangesens
 # l2 = lineSensors.check2()
 # l3 = lineSensors.check3()
 l4 = lineSensors.check4()
-ax, ay, vx, vy, r_mx, r_my = Adafruit_LSM303.mat_accel()
+ax, ay, vx, vy, r_mx, r_my = Adafruit_LSM303.mag_accel()
 
 # test variables
 # l1 = 0
