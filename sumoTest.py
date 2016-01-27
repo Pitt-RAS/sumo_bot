@@ -24,7 +24,7 @@ def pressToContinue():
 	else:
 		break
 
-
+#assumes 10mps is max velocity
 while True:
 	#Range Sensors
 	print('Testing Short Range')
@@ -71,16 +71,16 @@ while True:
 #Motors
 	print('Testing motor now')
 	pressToContinue()
-	#front
+	
+	#FRONT MOTOR TEST
 	motors.motor_move('w',4)
 	ax, ay, vx, vy, r_mx, r_my = Adafruit_LSM303.mat_accel()
-    #print results
 	print('ax = ', ax)
-	if (ax < 0 or ax >3000):
+	if (ax < 0 or ax >.25):
 		print('ax error')
 		break
 	print('ay = ', ay)
-	if (ay < 0 or ay > 3000):
+	if (ay < 0 or ay > .25):
 		print('ay error')
 		break
 	print('vx = ', vx)
@@ -89,14 +89,16 @@ while True:
 	print('r_my =', r_my)
 	pressToContinue()
 	motors.motor_move('x',0)
-	#back
+	
+	#BACK MOTOR TEST
 	motors.motor_move('s',4)
+	print('ax = ', ax)
     #print results
-    if (ax < 0 or ax >3000):
+	if (ax < 0 or ax >.25):
 		print('ax error')
 		break
 	print('ay = ', ay)
-	if (ay < 0 or ay > 3000):
+	if (ay < 0 or ay > .25):
 		print('ay error')
 		break
 	print('vx = ', vx)
@@ -106,15 +108,16 @@ while True:
 	pressToContinue()
 	time.sleep(3)
 	motors.motor_move('x',0)
-	#left
+		
+	#LEFT MOTOR TEST
 	motors.motor_move('a',4)
     #print results
 	print('ax = ', ax)
-	if (ax < 0 or ax >3000):
+	if (ax < 0 or ax >.25):
 		print('ax error')
 		break
 	print('ay = ', ay)
-	if (ay < 0 or ay > 3000):
+	if (ay < 0 or ay > .25):
 		print('ay error')
 		break
 	print('vx = ', vx)
@@ -123,14 +126,15 @@ while True:
 	print('r_my =', r_my)
 	pressToContinue()
 	motors.motor_move('x',0)
-	#right
+	
+	#RIGHT MOTOR TEST
 	motors.motor_move('d',4)
     #print results
-    if (ax < 0 or ax >3000):
+    if (ax < 0 or ax >.25):
 		print('ax error')
 		break
 	print('ay = ', ay)
-	if (ay < 0 or ay > 3000):
+	if (ay < 0 or ay > .25):
 		print('ay error')
 		break
 	print('vx = ', vx)
