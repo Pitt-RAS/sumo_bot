@@ -68,12 +68,13 @@ while True:
 	else:
 		print ('l4 working')
 		
-	#Motors
+#Motors
 	print('Testing motor now')
 	pressToContinue()
 	#front
 	motors.motor_move('w',4)
 	ax, ay, vx, vy, r_mx, r_my = Adafruit_LSM303.mat_accel()
+    #print results
 	print('ax = ', ax)
 	if (ax < 0 or ax >3000):
 		print('ax error')
@@ -90,10 +91,24 @@ while True:
 	motors.motor_move('x',0)
 	#back
 	motors.motor_move('s',4)
+    #print results
+    if (ax < 0 or ax >3000):
+		print('ax error')
+		break
+	print('ay = ', ay)
+	if (ay < 0 or ay > 3000):
+		print('ay error')
+		break
+	print('vx = ', vx)
+	print('vy = ', vy)
+	print('r_mx = ', r_mx)
+	print('r_my =', r_my)
+	pressToContinue()
 	time.sleep(3)
 	motors.motor_move('x',0)
 	#left
 	motors.motor_move('a',4)
+    #print results
 	print('ax = ', ax)
 	if (ax < 0 or ax >3000):
 		print('ax error')
@@ -110,9 +125,21 @@ while True:
 	motors.motor_move('x',0)
 	#right
 	motors.motor_move('d',4)
+    #print results
+    if (ax < 0 or ax >3000):
+		print('ax error')
+		break
+	print('ay = ', ay)
+	if (ay < 0 or ay > 3000):
+		print('ay error')
+		break
+	print('vx = ', vx)
+	print('vy = ', vy)
+	print('r_mx = ', r_mx)
+	print('r_my =', r_my)
+	pressToContinue()
 	time.sleep(3)
 	motors.motor_move('x',0)
-	
 	
 	
 	
