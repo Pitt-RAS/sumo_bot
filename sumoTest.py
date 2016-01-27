@@ -1,7 +1,7 @@
-from lineSense2 import lineSensor_Class()
-from longrangemethod import longrange_Class()
-from shortrangemethod import shortrange_Class()
-from minisumo_motorcontrol2 import Motors_Class()
+from lineSense2 import lineSensor_Class
+from longrangemethod import longrange_Class
+from shortrangemethod import shortrange_Class
+from minisumo_motorcontrol2 import Motors_Class
 from Adafruit_LSM303 import Adafruit_LSM303
 	
 lineSensors= lineSensor_Class()
