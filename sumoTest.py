@@ -10,7 +10,7 @@ longrange= longrange_Class()
 shortrange= shortrange_Class()
 
 short = shortrange.rngsens
-long = longrange.rangesens
+longone = longrange.rangesens
 # l1 = lineSensors.check1()
 # l2 = lineSensors.check2()
 # l3 = lineSensors.check3()
@@ -47,7 +47,7 @@ else:
 	print('short = ', short)
 print('\nTESTING LONG RANGE')
 pressToContinue()
-if long < 10 or long > 80:
+if longone < 10 or longone > 80:
 	print ('\nLONG RANGE NOT WORKING')
 else:
 	print('long = ', long)
