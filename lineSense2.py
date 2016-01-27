@@ -1,159 +1,172 @@
-from lineSense2 import lineSensor_Class()
-from longrangemethod import longrange_Class()
-from shortrangemethod import shortrange_Class()
-from minisumo_motorcontrol2 import Motors_Class()
-from Adafruit_LSM303 import Adafruit_LSM303
-	
-lineSensors= lineSensor_Class()
-motors= Motors_Class()
-longrange= longrange_Class()
-shortrange= shortrange_Class()
+import time
+import os
+import RPi.GPIO as GPIO
+SPICLK = 18
+SPIMISO = 23
+SPIMOSI = 24
+SPICS = 25
 
-short = shortrange.rngsens
-long = longrange.rangesens
-# l1 = lineSensors.check1()
-# l2 = lineSensors.check2()
-# l3 = lineSensors.check3()
-l4 = lineSensors.check4()
-ax, ay, vx, vy, r_mx, r_my = Adafruit_LSM303.mat_accel()
+    #anything less than 15 switch to short range sensors 
+class lineSensor_Class:
 
-# test variables
-# l1 = 0
-# l2 = 1
-# l3 = 1
-# l4 = 1
+	def __init__(self):
 
-# short = 12
-# long = 60
-# ax = -4
+		GPIO.setmode(GPIO.BCM)
+		global SPICLK 
+  		global SPIMISO
+  		global SPIMOSI
+  		global SPICS
+   
+      # set up the SPI interface pins
+  		GPIO.setup(SPIMOSI, GPIO.OUT)
+  		GPIO.setup(SPIMISO, GPIO.IN)
+  		GPIO.setup(SPICLK, GPIO.OUT)
+  		GPIO.setup(SPICS, GPIO.OUT)
+       
+      # 10k trim pot connected to adc #0
+  		
+  		
+     
+    # read SPI data from MCP3008 chip, 8 possible adc's (0 thru 7)
+	def readadc(self, adcnum, clockpin, mosipin, misopin, cspin):
+		if ((adcnum > 7) or (adcnum < 0)):
+                	return -1
+       		GPIO.output(cspin, True)
+ 
+        	GPIO.output(clockpin, False)  # start clock low
+        	GPIO.output(cspin, False)     # bring CS low
+     
+        	commandout = adcnum
+        	commandout |= 0x18  # start bit + single-ended bit
+        	commandout <<= 3    # we only need to send 5 bits here
+        	for i in range(5):
+                	if (commandout & 0x80):
+                        	GPIO.output(mosipin, True)
+                	else:
+                        	GPIO.output(mosipin, False)
+                	commandout <<= 1
+                	GPIO.output(clockpin, True)
+                	GPIO.output(clockpin, False)
+     
+        	adcout = 0
+            # read in one empty bit, one null bit and 10 ADC bits
+        	for i in range(12):
+                	GPIO.output(clockpin, True)
+                	GPIO.output(clockpin, False)
+                	adcout <<= 1
+                	if (GPIO.input(misopin)==1):
+                        	adcout |= 0x1
+     
+        	GPIO.output(cspin, True)
+            
+        	adcout >>= 1       # first bit is 'null' so drop it
+        	return adcout
+     
 
+	def check1(self):
+      # change these as desired - they're the pins connected from the
+      # SPI port on the ADC to the Cobbler
+		global SPICLK
+		global SPIMISO
+		global SPIMOSI
+		global SPICS
+  		potentiometer_adc = 2
+    	done=0
+		i=0
+      #last_read = 0       # this keeps track of the last potentiometer value
+      #tolerance = 5       # to keep from being jittery we'll only change
+      # volume when the pot has moved more than 5 'counts'
+		reading=0
+  		while (i<10):
+    		trim_pot = self.readadc(potentiometer_adc, SPICLK, SPIMOSI, SPIMISO, SPICS)
+    		reading = reading + trim_pot
+    		i += 1
 
+  		done = reading/10
+  		if (done<50):
+    			return 1
+  		else:
+    			return 0
 
-def pressToContinue():
-	command = 0
-	while (command != 1):
-		command = input('Press 1 to continue: ')
-		print(command)
-		
-#assumes 10mps is max velocity
+	def check2(self):
+      # change these as desired - they're the pins connected from the
+      # SPI port on the ADC to the Cobbler
+        # 10k trim pot connected to adc #0
+		global SPICLK
+		global SPIMISO
+		global SPIMOSI
+		global SPICS
+  		potentiometer_adc = 3
+  		reading = 0
+  		done = 0
+  		i = 0
+  #last_read = 0       # this keeps track of the last potentiometer value
+      #tolerance = 5       # to keep from being jittery we'll only change
+      # volume when the pot has moved more than 5 'counts'
+  		while (i<10):
 
-#Range Sensors
-print('\nTESTING SHORT RANGE')
-pressToContinue()
-print('outside press to continue')
-if short < 0 or short > 15: 
-	print('\nSHORT RANGE NOT WORKING')
-else:
-	print('short = ', short)
-print('\nTESTING LONG RANGE')
-pressToContinue()
-if long < 10 or long > 80:
-	print ('\nLONG RANGE NOT WORKING')
-else:
-	print('long = ', long)
-	
-#line sensors
-# print('\nTESTING LINE SENSORS')
-# pressToContinue()
-# print('place left corner over line')
-# pressToContinue()
-# if (l1 == 1):
-	# print('\nL1 NOT WORKING')
-# else:
-	# print ('l1 working')
-# print('\nPlace top right corner on line')
-# pressToContinue()
-# if (l2 == 1):
-	# print('\nL2 NOT WORKING')
-# else:
-	# print ('l2 working')
-# print('place bL corner on line')
-# pressToContinue()
-# if (l3 == 1):
-	# print('\nL3 NOT WORKING')
-# else:
-	# print ('l3 working')
-# print('place br corner on line')
-# pressToContinue()
-if (l4 == 1):
-	print('\nL4 NOT WORKING')
-else:
-	print ('l4 working')
-	
-#Motors
-print('\nTESTING MOTORS NOW')
-pressToContinue()
+    			trim_pot = self.readadc(potentiometer_adc, SPICLK, SPIMOSI, SPIMISO, SPICS)
+    			reading = reading + trim_pot
+    			i += 1
 
-#FRONT MOTOR TEST
-motors.motor_move('w',4)
-ax, ay, vx, vy, r_mx, r_my = Adafruit_LSM303.mat_accel()
-print('ax = ', ax)
-if (ax < 0 or ax >.25):
-	print('\nAX ERROR')
-print('ay = ', ay)
-if (ay < 0 or ay > .25):
-	print('\nAY ERROR')
-print('vx = ', vx)
-print('vy = ', vy)
-print('r_mx = ', r_mx)
-print('r_my =', r_my)
-pressToContinue()
-motors.motor_move('x',0)
+  		done = reading/10
+  		if (done<50):
+    			return 1
+  		else:
+    			return 0
 
-#BACK MOTOR TEST
-motors.motor_move('s',4)
-print('ax = ', ax)
-if (ax < 0 or ax >.25):
-	print('\nAX ERROR')
-print('ay = ', ay)
-if (ay < 0 or ay > .25):
-	print('\nAY ERROR')
-print('vx = ', vx)
-print('vy = ', vy)
-print('r_mx = ', r_mx)
-print('r_my =', r_my)
-pressToContinue()
-time.sleep(3)
-motors.motor_move('x',0)
-	
-#LEFT MOTOR TEST
-motors.motor_move('a',4)
-print('\nAX ERROR')
-if (ax < 0 or ax >.25):
-	pprint('\nAX ERROR')
-print('ay = ', ay)
-if (ay < 0 or ay > .25):
-	print('\nAY ERROR')
-print('vx = ', vx)
-print('vy = ', vy)
-print('r_mx = ', r_mx)
-print('r_my =', r_my)
-pressToContinue()
-motors.motor_move('x',0)
+	def check3(self):
+      # change these as desired - they're the pins connected from the
+      # SPI port on the ADC to the Cobbler
+   # set up the SPI interface pins
+      # 10k trim pot connected to adc #0
+		global SPICLK
+		global SPIMISO
+		global SPIMOSI
+		global SPICS
+  		potentiometer_adc = 4
+  		reading = 0
+ 		done = 0
+  		i = 0
+      #last_read = 0       # this keeps track of the last potentiometer value
+      #tolerance = 5       # to keep from being jittery we'll only change
+      # volume when the pot has moved more than 5 'counts'
+  		while (i<10):
 
-#RIGHT MOTOR TEST
-motors.motor_move('d',4)
-if (ax < 0 or ax >.25):
-	print('\nAX ERROR')
-print('ay = ', ay)
-if (ay < 0 or ay > .25):
-	print('\nAY ERROR')
-print('vx = ', vx)
-print('vy = ', vy)
-print('r_mx = ', r_mx)
-print('r_my =', r_my)
-pressToContinue()
-time.sleep(3)
-motors.motor_move('x',0)
+    			trim_pot = self.readadc(potentiometer_adc, SPICLK, SPIMOSI, SPIMISO, SPICS)
+    			reading = reading + trim_pot
+    			i += 1
 
-	
-	
-	
-	
-	
-	
-	
-		
+  		done = reading/10
+  		if (done<50):
+    			return 1
+  		else:
+    			return 0
 
-	
-	
+	def check4(self):
+      # change these as desired - they're the pins connected from the
+      # SPI port on the ADC to the Cobbler
+    
+      # set up the SPI interface pins     
+      # 10k trim pot connected to adc #0
+		global SPICLK
+		global SPIMISO
+		global SPIMOSI
+		global SPICS
+		potentiometer_adc = 5
+  		reading = 0
+  		done = 0
+  		i = 0
+      #last_read = 0       # this keeps track of the last potentiometer value
+      #tolerance = 5       # to keep from being jittery we'll only change
+      # volume when the pot has moved more than 5 'counts'
+  		while (i<10):
+  		  	trim_pot = self.readadc(potentiometer_adc, SPICLK, SPIMOSI, SPIMISO, SPICS)
+  		  	reading = reading + trim_pot
+    		i += 1
+
+  		done = reading/10
+  		if (done<50):
+    			return 1
+  		else:
+    			return 0
