@@ -1,3 +1,4 @@
+#MC2
 import RPi.GPIO as io
 io.setmode(io.BCM)
 import sys, tty, termios, time
@@ -7,12 +8,12 @@ import sys, tty, termios, time
 # pins used for the input, starts the PWM and sets the
 # motors' speed to 0
 motor1_in1_pin = 19
-motor1_in2_pin = 26
-motor2_in1_pin = 6
-motor2_in2_pin = 13
+motor1_in2_pin = 29
+motor2_in1_pin = 5
+motor2_in2_pin = 16
 motor1= None
 motor2= None
-class Motors_Class:
+class Motors_Class2:
 	def __init__(self):
 	        global motor1_in1_pin
 		global motor1_in2_pin
