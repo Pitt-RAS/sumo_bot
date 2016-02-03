@@ -31,17 +31,17 @@ def checkLines():
 		motors.motor_move('a', 4)
 		detect = 1
 	elif lineSensors.check2() == 1:
-		motors.motor_move('x',0)
+		moving('x')
 		motors2.motor_move('x', 0)
 		motors.motor_move('a', 4)
 		motors.motor_move('a', 4)
 		detect = 1
 	elif lineSensors.check3() == 1:
-		motors.motor_move('x',0)
+		moving('x')
 		motors.motor_move('a', 4)
 		detect = 1
 	elif lineSensors.check4() == 1:
-		motors.motor_move('x',0)
+		moving('x')
 		motors.motor_move('a', 4)
 		detect = 1
 	else:
@@ -55,21 +55,21 @@ def loop2():  #used in sense line origin part of flow chart
 			if lines == 0:
 				#all of these checks seem to lead to the same action in the flow chart?
 				if mouse_data[1] > 0  and mouse_data[0] > 0:
-					motors.motor_move('x',0)
+					moving('x')
 					motors.motor_move('a', 2)
 				elif mouse_data[0] < 0 and mouse_data[1] > 0:
-					motors.motor_move('x',0)
+					moving('x')
 					motors.motor_move('a', 2)
 				elif mouse_data[0] > 0 and mouse_data[1] < 0:
-					motors.motor_move('x',0)
+					moving('x')
 					motors.motor_move('a', 2)
 				elif mouse_data[0] < 0 and mouse_data[1] < 0:
-					motors.motor_move('x',0)
+					moving('x')
 					motors.motor_move('a', 2)
 				else:
 					break 
 			else:
-				motors.motor_move('x',0)
+				moving('x')
 				motors.motor_move('a', 4)
 		else:
 			break 
@@ -79,13 +79,13 @@ def moving(dir):
 		motors.motor_move('x', 0)
 		motors2.motor_move('x', 0)
 	if dir = 'a':
-		motors.motor_move('a',4)
+		motors.motor_move('a', 4)
 		motors2.motor_move('a',4)
 	if dir = 's':
 		motors.motor_move('s',4)
 		motors2.motor_move('s',4)
 	if dir = 'd':
-		motors.motor_move('d',4)
+		motors.motor_move('d', 4)
 		motors2.motor_move('d',4)
 	if dir = 'w':
 		motors.motor_move('w',4)
@@ -121,16 +121,16 @@ while True:
 					move('w')
 			if mouse_data[0] > 0:
 				move('x')
-				motors.motor_move('d',4)
+				moving('d')
 		elif cv == 0: #<300
 			moving('x')
-			motors.motor_move('d',4)
+			moving('d')
 			if mouse_data[0] > 0:
-				motors.motor_move('x',0)
-				motors.motor_move('d',4)
+				moving('x')
+				moving('d')
 			else:
-				motors.motor_move('x',0)
-				motors.motor_move('a',4)
+				moving('x')
+				moving('a')
 	lines = checkLines()
 	if origin == 'y':
 		if lines == 0:
@@ -139,12 +139,12 @@ while True:
 					break
 				else:
 				#this part needs work
-					motors.motor_move('x',0)
-					motors.motor_move('a',4)
+					moving('x')
+					moving('a')
 					time.sleep(6) ##check time (sec) for 120 degrees
-					motors.motor_move('x',0)
+					moving('x')
 					loop2()
-					motors.motor_move('d',0)
+					moving('d')
 					time.sleep(4) #check time for 60 degrees
 					loop2()
 		else:
@@ -154,8 +154,8 @@ while True:
 				else:
 					degrees = 0
 					while degrees <= 360:
-						motors.motor_move('x',0)
-						motors.motor_move('d',4)
+						moving('x')
+						moving('d')
 						time.sleep(2) ##check how long it takes to turn 10 degrees
 						loop2()
 						degrees+=10
