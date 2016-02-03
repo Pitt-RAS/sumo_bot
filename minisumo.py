@@ -6,14 +6,13 @@ import time
 
 #load files
 
-execfile("lineSense2.py")
-execfile("longrangemethod.py")
-execfile("minisumo.py")
-execfile("minisumo_motorcontrol	2.py")
-execfile("mouse1.py")
-execfile("rangesensor.py")
-execfile("short_range_Sense.py")
-execfile("shortrangemethod.py")
+from lineSense2 import lineSensor_Class
+from longrangemethod import longrange_Class
+from shortrangemethod import shortrange_Class
+from minisumo_motorcontrol2 import Motors_Class
+from minisumo_motorcontrol3 import Motors_Class2
+from Adafruit_LSM303 import Adafruit_LSM303
+	
 
 #Create objects	and variables
 lineSensors= lineSensor_Class()
