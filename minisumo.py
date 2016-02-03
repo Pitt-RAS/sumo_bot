@@ -1,7 +1,3 @@
-# 
-#Need to make this file use the same objects like test.py
-#use from lineSense2 import lineSensor_Class not the execfile()
-#
 import time
 
 #load files
@@ -11,8 +7,7 @@ from longrangemethod import longrange_Class
 from shortrangemethod import shortrange_Class
 from minisumo_motorcontrol2 import Motors_Class
 from minisumo_motorcontrol3 import Motors_Class2
-from Adafruit_LSM303 import Adafruit_LSM303
-	
+from accelerometer import Accel
 
 #Create objects	and variables
 lineSensors= lineSensor_Class()
