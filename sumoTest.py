@@ -2,7 +2,7 @@ from lineSense2 import lineSensor_Class
 from longrangemethod import longrange_Class
 from shortrangemethod import shortrange_Class
 from minisumo_motorcontrol2 import Motors_Class
-from Adafruit_LSM303 import Adafruit_LSM303
+from accelerometer import Accel
 	
 lineSensors= lineSensor_Class()
 motors= Motors_Class()
@@ -15,7 +15,7 @@ longone = longrange.rangesens
 # l2 = lineSensors.check2()
 # l3 = lineSensors.check3()
 l4 = lineSensors.check4()
-ax, ay, vx, vy, r_mx, r_my = Adafruit_LSM303.mag_accel()
+ax, ay, vx, vy, r_mx, r_my = Accel.mag_accel
 
 # test variables
 # l1 = 0
