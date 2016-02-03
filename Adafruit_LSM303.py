@@ -173,12 +173,7 @@ class Adafruit_LSM303(Adafruit_I2C):
 	  r_my = int(r_my)
 	  print "Mag x: %d" % (r_mx)
 	  print "Mag y: %d" % (r_my)  
-	  return (axtotal)
-	  return(aytotal)
-	  return(vx)
-	  return(vy)
-	  return(r_mx)
-	  return(r_my)
+	  return (axtotal, aytotal, vx, vy, r_mx, r_my)
 	  
         
        # sleep(1) # Output is fun to watch if this is commented out
