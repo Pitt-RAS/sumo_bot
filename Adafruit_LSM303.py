@@ -129,6 +129,7 @@ def mag_accel():
 	lsm = Adafruit_LSM303()
 
 	print '[(Accelerometer X, Y, Z), (Magnetometer X, Y, Z, orientation)]'
+	axtotal = aytotal = mxtotal = mytotal = 0
 	for i in xrange(1,5):
 		output = lsm.read()
 		axlast = output[0]
@@ -138,7 +139,6 @@ def mag_accel():
 		mylast = output[4]
 		mzlast = output[5]
 		ax1 = ay1 = mx1 = my1 = 0
-		axtotal = aytotal = mxtotal = mytotal = 0
 		
 		sleep(.05)
 		newOut = lsm.read()
