@@ -17,6 +17,7 @@ from Adafruit_LSM303 import Adafruit_LSM303
 #Create objects	and variables
 lineSensors= lineSensor_Class()
 motors= Motors_Class()
+motors2 = Motors_Class2()
 longrange= longrange_Class()
 shortrange= shortrange_Class()
 mouse_data = mouse_pos(stat,x,y)
