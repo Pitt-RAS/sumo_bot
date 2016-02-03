@@ -27,11 +27,13 @@ origin = 'y'
 ##can move this function into the lineSensors class
 def checkLines():
 	if lineSensors.check1() == 1:
-		motors.motor_move('x',0)
+		motors.motor_move('a', 4)
 		motors.motor_move('a', 4)
 		detect = 1
 	elif lineSensors.check2() == 1:
 		motors.motor_move('x',0)
+		motors2.motor_move('x', 0)
+		motors.motor_move('a', 4)
 		motors.motor_move('a', 4)
 		detect = 1
 	elif lineSensors.check3() == 1:
@@ -71,6 +73,23 @@ def loop2():  #used in sense line origin part of flow chart
 				motors.motor_move('a', 4)
 		else:
 			break 
+		
+def moving(dir):
+	if dir = 'x':
+		motors.motor_move('x', 0)
+		motors2.motor_move('x', 0)
+	if dir = 'a':
+		motors.motor_move('a',4)
+		motors2.motor_move('a',4)
+	if dir = 's':
+		motors.motor_move('s',4)
+		motors2.motor_move('s',4)
+	if dir = 'd':
+		motors.motor_move('d',4)
+		motors2.motor_move('d',4)
+	if dir = 'w':
+		motors.motor_move('w',4)
+		motors2.motor_move('w', 4)
 
 ##MAIN LOOP
 while True:
@@ -78,11 +97,11 @@ while True:
 	while short > 2 and short < 15:
 	##the part in the if should be added to the motor_move method so it doesn't need repeated
 		if first == 'y':
-			motors.motor_move('x',0)
+			moving('x')
 			time.sleep(1)
 			first = 'n'
 		else:
-			motors.motor_move('w',4)
+			moving('w')
 			origin = 'n'
 			lines = checkLines()
 	long = longrange.rangesens
@@ -90,21 +109,21 @@ while True:
 		##not sure what the computer vision methods look like
 		##this is an outline
 		if cv == 1: #> 300
-			motors.motor_move('x',0)
+			moving('x')
 			time.sleep(1)
-			motors.motor_move('a',4)
+			moving('a')
 			if mouse_data[0] < 0:
 				if mouse_y > 0:
 					origin = 'n'
 					break
 				else:
-					motors.motor_move('x',0)
-					motors.motor_move('w',4)
+					move('x')
+					move('w')
 			if mouse_data[0] > 0:
-				motors.motor_move('x',0)
+				move('x')
 				motors.motor_move('d',4)
 		elif cv == 0: #<300
-			motors.motor_move('x',0)
+			moving('x')
 			motors.motor_move('d',4)
 			if mouse_data[0] > 0:
 				motors.motor_move('x',0)
