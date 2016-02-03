@@ -1,4 +1,4 @@
-	#!/usr/bin/python
+#!/usr/bin/python
 
 # Python library for Adafruit Flora Accelerometer/Compass Sensor (LSM303).
 # This is pretty much a direct port of the current Arduino library and is
@@ -167,7 +167,7 @@ def mag_accel():
 		print "Velocity y: %d" % (vy)
 		print "Mag x: %d" % (r_mx)
 		print "Mag y: %d" % (r_my)  
-		return (axtotal, aytotal, vx, vy, r_mx, r_my)
+	return (axtotal, aytotal, vx, vy, r_mx, r_my)
 		  
 # sleep(1) # Output is fun to watch if this is commented out
 
