@@ -15,7 +15,7 @@ longone = longrange.rangesens
 # l2 = lineSensors.check2()
 # l3 = lineSensors.check3()
 l4 = lineSensors.check4()
-results = Accel.mag_accel
+results = Accel.mag_accel()
 
 # test variables
 # l1 = 0
@@ -27,8 +27,8 @@ results = Accel.mag_accel
 # long = 60
 # ax = -4
 
-axtotal = results[0] 
-aytotal = results[1] 
+ax = results[0] 
+ay = results[1] 
 vx = results[2] 
 vy = results[3] 
 r_mx = results[4] 
@@ -93,7 +93,13 @@ pressToContinue()
 
 #FRONT MOTOR TEST
 motors.motor_move('w',4)
-ax, ay, vx, vy, r_mx, r_my = Adafruit_LSM303.mat_accel()
+results = Adafruit_LSM303.mag_accel()
+ax = results[0] 
+ay = results[1] 
+vx = results[2] 
+vy = results[3] 
+r_mx = results[4] 
+r_my = results[5] 
 print('ax = ', ax)
 if (ax < 0 or ax >.25):
 	print('\nAX ERROR')
