@@ -15,7 +15,7 @@ longone = longrange.rangesens
 # l2 = lineSensors.check2()
 # l3 = lineSensors.check3()
 l4 = lineSensors.check4()
-ax, ay, vx, vy, r_mx, r_my = Accel.mag_accel
+results = Accel.mag_accel
 
 # test variables
 # l1 = 0
@@ -26,6 +26,13 @@ ax, ay, vx, vy, r_mx, r_my = Accel.mag_accel
 # short = 12
 # long = 60
 # ax = -4
+
+results[0] = axtotal
+results[1] = aytotal
+results[2] = vx
+results[3] = vy
+results[4] = r_mx
+results[5] = r_my
 
 
 
