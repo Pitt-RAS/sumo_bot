@@ -26,9 +26,6 @@
 # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 # DEALINGS IN THE SOFTWARE.
 
-from Adafruit_I2C import Adafruit_I2C
-
-
 class Adafruit_LSM303(Adafruit_I2C):
 
     # Minimal constants carried over from Arduino library
@@ -109,7 +106,7 @@ class Adafruit_LSM303(Adafruit_I2C):
         self.mag.write8( LSM303_REGISTER_MAG_CRB_REG_M, gain)
 
 
-Simple example prints accel/mag data once per second:
+#Simple example prints accel/mag data once per second:
 # if __name__ == '__main__':
 
     # from time import sleep
@@ -130,6 +127,7 @@ class Accel (Adafruit_LSM303):
 	
 		print '[(Accelerometer X, Y, Z), (Magnetometer X, Y, Z, orientation)]'
 		axtotal = aytotal = mxtotal = mytotal = 0
+		return_array = [6*[0]]
 		for i in xrange(1,5):
 			output = lsm.read()
 			axlast = output[0]
@@ -167,7 +165,13 @@ class Accel (Adafruit_LSM303):
 			print "Velocity y: %d" % (vy)
 			print "Mag x: %d" % (r_mx)
 			print "Mag y: %d" % (r_my)  
-		return (axtotal, aytotal, vx, vy, r_mx, r_my)
+		return_array[0] = axtotal
+		return_array[1] = aytotal
+		return_array[2] = vx
+		return_array[3] = vy
+		return_array[4] = r_mx
+		return_array[5] = r_my
+		return (return_array)
 			  
 # sleep(1) # Output is fun to watch if this is commented out
 
