@@ -27,12 +27,12 @@ results = Accel.mag_accel
 # long = 60
 # ax = -4
 
-results[0] = axtotal
-results[1] = aytotal
-results[2] = vx
-results[3] = vy
-results[4] = r_mx
-results[5] = r_my
+axtotal = results[0] 
+aytotal = results[1] 
+vx = results[2] 
+vy = results[3] 
+r_mx = results[4] 
+r_my = results[5] 
 
 
 
