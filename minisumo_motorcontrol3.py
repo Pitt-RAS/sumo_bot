@@ -8,9 +8,9 @@ import sys, tty, termios, time
 # pins used for the input, starts the PWM and sets the
 # motors' speed to 0
 motor1_in1_pin = 19
-motor1_in2_pin = 29
-motor2_in1_pin = 5
-motor2_in2_pin = 16
+motor1_in2_pin = 11
+motor2_in1_pin = 16
+motor2_in2_pin = 20
 motor1= None
 motor2= None
 class Motors_Class2:
@@ -21,8 +21,11 @@ class Motors_Class2:
 		global motor2_in2_pin
 		global motor1
 		global motor2
+		global stdby
+		io.setup(stdby, io.OUT)
 		io.setup(motor1_in1_pin, io.OUT)
 		io.setup(motor1_in2_pin, io.OUT)
+		stdby.start(0)
 		io.setup(4,io.OUT)
 		motor1 = io.PWM(4,100)
 		motor1.start(0)
@@ -33,10 +36,12 @@ class Motors_Class2:
 		motor2 = io.PWM(17,100)
 		motor2.start(0)
 		motor2.ChangeDutyCycle(0)
+		io.output(stdby, True)
 		io.output(motor1_in1_pin, False)
 		io.output(motor1_in2_pin, False)
 		io.output(motor2_in1_pin, False)
 		io.output(motor2_in2_pin, False)
+		
 # The getch method can determine which key has been pressed
 # by the user on the keyboard by accessing the system files
 # It will then return the pressed key as a variable
