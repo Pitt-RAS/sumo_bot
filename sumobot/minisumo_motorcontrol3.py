@@ -7,10 +7,10 @@ import sys, tty, termios, time
 # the two DC motors on the RC car. It defines the two GPIO
 # pins used for the input, starts the PWM and sets the
 # motors' speed to 0
-motor1_in1_pin = 9
-motor1_in2_pin = 20
-motor2_in1_pin = 5
-motor2_in2_pin = 16
+motor1_in1_pin = 19
+motor1_in2_pin = 11
+motor2_in1_pin = 16
+motor2_in2_pin = 20
 standby= 27
 motor1= None
 motor2= None
