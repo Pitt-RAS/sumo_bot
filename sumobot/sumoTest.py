@@ -21,9 +21,9 @@ y0 = 0
 #DRIVE FORWARD TEST LOOP
 while True:
 	motors.motor_move('w', 4)
-	if l1 == 1: #if senses front line sensor.
-		motors.motor_move('x', 0)
-		break
+	# if l1 == 1: #if senses front line sensor.
+		# motors.motor_move('x', 0)
+		# break
 	if short > 0 and short < 15:
 		print('short = ', short)
 		motors.motor_move('x', 0)
@@ -39,9 +39,9 @@ while True:
 
 # DRIVE BACKWARD TEST
 while True:
-	if l4 == 1:
-		motors.motor_move('x', 0)
-		break
+	# if l4 == 1:
+		# motors.motor_move('x', 0)
+		# break
     if short > 0 and short < 15:
         print('short = ', short)
         motors.motor_move('x', 0)
