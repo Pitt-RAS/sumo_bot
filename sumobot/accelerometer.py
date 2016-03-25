@@ -26,8 +26,11 @@
 # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 # DEALINGS IN THE SOFTWARE.
 
+<<<<<<< HEAD:accelerometer.py
+=======
 from Adafruit_I2C import Adafruit_I2C
 
+>>>>>>> origin/master:sumobot/accelerometer.py
 class Adafruit_LSM303(Adafruit_I2C):
 
     # Minimal constants carried over from Arduino library
@@ -123,39 +126,43 @@ class Adafruit_LSM303(Adafruit_I2C):
 
 
 class Accel (Adafruit_LSM303):
-	def mag_accel():
+	def mag_accel(self, x0, y0):
 		from time import sleep
 		lsm = Adafruit_LSM303()
 	
 		print '[(Accelerometer X, Y, Z), (Magnetometer X, Y, Z, orientation)]'
 		axtotal = aytotal = mxtotal = mytotal = 0
-		return_array = [6*[0]]
+		return_array = [4*[0]]
 		for i in xrange(1,5):
 			output = lsm.read()
-			axlast = output[0]
-			aylast = output[1]
-			azlast = output[2]
-			mxlast = output[3]
-			mylast = output[4]
-			mzlast = output[5]
+			axfirst = output[0]
+			ayfirst = output[1]
+			azfirst = output[2]
+			mxfirst = output[3]
+			myfirst = output[4]
+			mzfirst = output[5]
 			ax1 = ay1 = mx1 = my1 = 0
 			
 			sleep(.05)
-			newOut = lsm.read()
-			mx = newOut[3]
-			my = newOut[4]
-			mx1 = mx - mxlast
-			my1 = my - mylast
-			mxtotal = mxtotal + mx1
-			mytotal = mytotal + my1
+            #READ VALUES FROM ACCELEROMETER AND MAGNETOMETER
+			# newOut = lsm.read()
+
+			# mx = newOut[3]
+			# my = newOut[4]
+			# mx1 = mx - mxlast
+			# my1 = my - mylast
+			# mxtotal = mxtotal + mx1
+			# mytotal = mytotal + my1
 			
-			ax= newOut[0]
-			ay = newOut[1]
-			ax1 = ax-axlast
-			ay1 = ay-aylast
-			axtotal = axtotal + ax1
-			aytotal = aytotal + ay1
-			
+			# ax= newOut[0]
+			# ay = newOut[1]
+
+			# ax1 = ax-axlast
+			# ay1 = ay-aylast
+			# axtotal = axtotal + ax1
+			# aytotal = aytotal + ay1
+
+			#get velocity
 			r_mx = int(mxtotal/5)
 			r_my = int(mytotal/5)
 			r_ax = int(axtotal/5)
@@ -165,15 +172,28 @@ class Accel (Adafruit_LSM303):
 			
 			print "Velocity x: %d" % (vx)
 			print "Velocity y: %d" % (vy)
-			print "Mag x: %d" % (r_mx)
-			print "Mag y: %d" % (r_my)  
-		return_array[0] = axtotal
-		return_array[1] = aytotal
-		return_array[2] = vx
-		return_array[3] = vy
-		return_array[4] = r_mx
-		return_array[5] = r_my
-		return (return_array)
+
+            # SMOOTHING
+
+            dt = .05
+            RC = 0.3
+            alpha = dt / (RC + dt)
+            smooth_x = (alpha * axfirst) + (1 - alpha) * x0
+            smooth_y = (alpha * ayfirst) + (1 - alpha) * y0
+			return (smooth_x, smooth_y, x0, y0)
+			# print "Mag x: %d" % (r_mx)
+			# print "Mag y: %d" % (r_my)
+            # return_array[0] = axtotal
+            # return_array[1] = aytotal
+            # return_array[2] = vx
+            # return_array[3] = vy
+
+
+
+
+
+
+
 			  
 # sleep(1) # Output is fun to watch if this is commented out
 
