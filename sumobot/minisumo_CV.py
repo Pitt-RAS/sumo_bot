@@ -1,6 +1,11 @@
 import numpy as np
+from minisumo_motorcontrol2 import Motors_Class
+from minisumo_motorcontrol3 import Motors_Class2
+import sys, select
 import cv2
 
+motors= Motors_Class()
+motors2= Motors_Class2()
 cap = cv2.VideoCapture(0)
 
 # take first frame of the video
@@ -23,19 +28,22 @@ term_crit = ( cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, 10, 1 )
 
 while(1):
     ret ,frame = cap.read()
-
+    direct = raw_input()
     if ret == True:
         hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
         dst = cv2.calcBackProject([hsv],[0],roi_hist,[0,180],1)
-
+	motors.motor_move(direct,4)
+        motors2.motor_move(direct,4)
         # apply meanshift to get the new location
         ret, track_window = cv2.meanShift(dst, track_window, term_crit)
-
         # Draw it on image
         x,y,w,h = track_window
         img2 = cv2.rectangle(frame, (x,y), (x+w,y+h), 255,2)
         cv2.imshow('img2',img2)
-
+	print("x+w/2")
+	print((x+w)/2)
+	print("y+h/2")
+	print((y+h)/2)
         k = cv2.waitKey(60) & 0xff
         if k == 27:
             break

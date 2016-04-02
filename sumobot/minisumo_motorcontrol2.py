@@ -15,7 +15,7 @@ motor1= None
 motor2= None
 class Motors_Class:
 	def __init__(self):
-	    global motor1_in1_pin
+	    	global motor1_in1_pin
 		global motor1_in2_pin
 		global motor2_in1_pin
 		global motor2_in2_pin
@@ -25,7 +25,6 @@ class Motors_Class:
 		io.setup(stdby, io.OUT)
 		io.setup(motor1_in1_pin, io.OUT)
 		io.setup(motor1_in2_pin, io.OUT)
-		stdby.start(0)
 		io.setup(4,io.OUT)
 		motor1 = io.PWM(4,100)
 		motor1.start(0)
@@ -36,7 +35,7 @@ class Motors_Class:
 		motor2 = io.PWM(17,100)
 		motor2.start(0)
 		motor2.ChangeDutyCycle(0)
-		io.output(stby, True)
+		io.output(stdby, True)
 		io.output(motor1_in1_pin, False)
 		io.output(motor1_in2_pin, False)
 		io.output(motor2_in1_pin, False)
@@ -93,13 +92,13 @@ class Motors_Class:
 		speed = int(speednum)*11
     # The car will drive forward when the "w" key is pressed
 		if(char == "w"):
-    		self.motor2_forward()
-    		motor2.ChangeDutyCycle(speed)
+    			self.motor2_forward()
+    			motor2.ChangeDutyCycle(speed)
 			self.motor1_forward()
 			motor1.ChangeDutyCycle(speed)
     # The car will reverse when the "s" key is pressed
 		if(char == "s"):
-    		self.motor2_reverse()
+    			self.motor2_reverse()
    			motor2.ChangeDutyCycle(speed)
 			self.motor1_reverse()
 			motor1.ChangeDutyCycle(speed)
@@ -107,15 +106,15 @@ class Motors_Class:
 		if(char == "a"):
         #toggleSteering("left")
 			self.motor2_forward()
-       		motor2.ChangeDutyCycle(speed)
-       		self.motor1_reverse()
-       		motor1.ChangeDutyCycle(speed)
+       			motor2.ChangeDutyCycle(speed+3)
+       			self.motor1_reverse()
+       			motor1.ChangeDutyCycle(speed)
     # The "d" key will toggle the steering right
 		if(char == "d"):
-       		self.motor2_reverse()
-       		motor2.ChangeDutyCycle(speed)
-       		self.motor1_forward()
-       		motor1.ChangeDutyCycle(speed)
+       			self.motor2_reverse()
+       			motor2.ChangeDutyCycle(speed)
+       			self.motor1_forward()
+       			motor1.ChangeDutyCycle(speed+3)
     # to save the next key that is pressed
 		char = ""
 

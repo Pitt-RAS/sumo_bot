@@ -7,7 +7,7 @@ import sys, tty, termios, time
 # the two DC motors on the RC car. It defines the two GPIO
 # pins used for the input, starts the PWM and sets the
 # motors' speed to 0
-motor1_in1_pin = 19
+motor1_in1_pin = 12
 motor1_in2_pin = 11
 motor2_in1_pin = 16
 motor2_in2_pin = 20
@@ -104,15 +104,15 @@ class Motors_Class2:
 		if(char == "a"):
         #toggleSteering("left")
 			self.motor2_forward()
-       			motor2.ChangeDutyCycle(speed)
+       			motor2.ChangeDutyCycle(speed+3)
        			self.motor1_reverse()
-       			motor1.ChangeDutyCycle(speed)
+       			motor1.ChangeDutyCycle(speed+3)
     # The "d" key will toggle the steering right
 		if(char == "d"):
        			self.motor2_reverse()
-       			motor2.ChangeDutyCycle(speed)
+       			motor2.ChangeDutyCycle(speed+3)
        			self.motor1_forward()
-       			motor1.ChangeDutyCycle(speed)
+       			motor1.ChangeDutyCycle(speed+3)
     # to save the next key that is pressed
 		char = ""
 

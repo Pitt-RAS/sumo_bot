@@ -71,16 +71,16 @@ class lineSensor_Class:
 		global SPIMOSI
 		global SPICS
   		potentiometer_adc = 2
-    	done=0
+    		done=0
 		i=0
       #last_read = 0       # this keeps track of the last potentiometer value
       #tolerance = 5       # to keep from being jittery we'll only change
       # volume when the pot has moved more than 5 'counts'
 		reading=0
   		while (i<10):
-    		trim_pot = self.readadc(potentiometer_adc, SPICLK, SPIMOSI, SPIMISO, SPICS)
-    		reading = reading + trim_pot
-    		i += 1
+    			trim_pot = self.readadc(potentiometer_adc, SPICLK, SPIMOSI, SPIMISO, SPICS)
+    			reading = reading + trim_pot
+    			i += 1
 
   		done = reading/10
   		if (done<50):
