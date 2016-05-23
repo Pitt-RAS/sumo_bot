@@ -1,5 +1,5 @@
 # PITT RAS 2015-2016 Mini Sumo Bot Team
-# Co-Leads: [Vinayak Nesarikar](van7@pitt.edu) (Software and Hardware) and Ben Bush (Mechanical)
+## Co-Leads: [Vinayak Nesarikar](van7@pitt.edu) (Software and Hardware) and Ben Bush (Mechanical)
 ## Team Members:
 * Ali Abdulhayoglu (Hardware)
 * Andrew Difurio (Software)
@@ -7,5 +7,5 @@
 * Zoe Toigo (Software)
 
 ## Description:
-	
+	To Come
 
