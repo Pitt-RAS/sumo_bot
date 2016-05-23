@@ -5,5 +5,5 @@ motors=Motors_Class()
 motors2=Motors_Class2()
 while(1):
 	direct = raw_input()
-	motors.motor_move(direct,4)
-        motors2.motor_move(direct,4)
+	motors.motor_move(direct,6)
+        motors2.motor_move(direct,6)

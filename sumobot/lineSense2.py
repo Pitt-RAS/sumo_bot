@@ -1,6 +1,10 @@
 import time
 import os
 import RPi.GPIO as GPIO
+from minisumo_motorcontrol2 import Motors_Class
+from minisumo_motorcontrol3 import Motors_Class2
+motor1= Motors_Class()
+motor2 = Motors_Class2()
 SPICLK = 18
 SPIMISO = 23
 SPIMOSI = 24
@@ -70,7 +74,7 @@ class lineSensor_Class:
 		global SPIMISO
 		global SPIMOSI
 		global SPICS
-  		potentiometer_adc = 2
+  		potentiometer_adc = 1
     		done=0
 		i=0
       #last_read = 0       # this keeps track of the last potentiometer value
@@ -83,7 +87,9 @@ class lineSensor_Class:
     			i += 1
 
   		done = reading/10
-  		if (done<50):
+		print("\n done1")
+		print(done)
+  		if (done<90):
     			return 1
   		else:
     			return 0
@@ -96,7 +102,7 @@ class lineSensor_Class:
 		global SPIMISO
 		global SPIMOSI
 		global SPICS
-  		potentiometer_adc = 3
+  		potentiometer_adc = 2
   		reading = 0
   		done = 0
   		i = 0
@@ -110,7 +116,10 @@ class lineSensor_Class:
     			i += 1
 
   		done = reading/10
-  		if (done<50):
+                print("\n done2")
+                print(done)
+
+  		if (done<90):			
     			return 1
   		else:
     			return 0
@@ -124,7 +133,7 @@ class lineSensor_Class:
 		global SPIMISO
 		global SPIMOSI
 		global SPICS
-  		potentiometer_adc = 4
+  		potentiometer_adc = 3
   		reading = 0
  		done = 0
   		i = 0
@@ -138,7 +147,9 @@ class lineSensor_Class:
     			i += 1
 
   		done = reading/10
-  		if (done<50):
+		print("\n done3")
+                print(done)
+  		if (done<90):	
     			return 1
   		else:
     			return 0
@@ -153,7 +164,7 @@ class lineSensor_Class:
 		global SPIMISO
 		global SPIMOSI
 		global SPICS
-		potentiometer_adc = 5
+		potentiometer_adc = 4
   		reading = 0
   		done = 0
   		i = 0
@@ -161,12 +172,14 @@ class lineSensor_Class:
       #tolerance = 5       # to keep from being jittery we'll only change
       # volume when the pot has moved more than 5 'counts'
   		while (i<10):
-  		  	trim_pot = self.readadc(potentiometer_adc, SPICLK, SPIMOSI, SPIMISO, SPICS)
+  		  	trim_pot = self.readadc(potentiometer_adc, SPICLK, SPIMOSI, SPIMISO, SPICS)	
   		  	reading = reading + trim_pot
-    		i += 1
+    			i += 1
 
   		done = reading/10
-  		if (done<50):
+		print("\n done4")
+                print(done)
+  		if (done<90):	
     			return 1
   		else:
     			return 0

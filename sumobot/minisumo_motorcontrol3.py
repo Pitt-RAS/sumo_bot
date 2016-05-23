@@ -14,6 +14,8 @@ motor2_in2_pin = 20
 standby= 27
 motor1= None
 motor2= None
+speed=0
+direction1=0
 class Motors_Class2:
 	def __init__(self):
 	        global motor1_in1_pin
@@ -55,12 +57,12 @@ class Motors_Class2:
 		io.output(motor1_in2_pin, True)
 
 	def motor2_forward(self):
-		io.output(motor2_in1_pin, True)
-		io.output(motor2_in2_pin, False)
-
-	def motor2_reverse(self):
 		io.output(motor2_in1_pin, False)
 		io.output(motor2_in2_pin, True)
+
+	def motor2_reverse(self):
+		io.output(motor2_in1_pin, True)
+		io.output(motor2_in2_pin, False)
 
 # Setting the PWM pins to false so the motors will not move
 # until the user presses the first key
@@ -75,11 +77,14 @@ class Motors_Class2:
 		global motor2_in2_pin
 		global motor1
 		global motor2
+		global direction1
+		global speed
+		direction1 = direction 
     # Keyboard character retrieval method is called and saved
     # into variable
     # The "x" key will break the loop and exit the program
-		char=direction	
-	 	if(direction == "x"):
+		char=direction1	
+	 	if(direction1 == "x"):
     			#print("Program Ended")
 			io.output(motor1_in1_pin, False)
 			io.output(motor1_in2_pin, False)
@@ -104,18 +109,18 @@ class Motors_Class2:
 		if(char == "a"):
         #toggleSteering("left")
 			self.motor2_forward()
-       			motor2.ChangeDutyCycle(speed+3)
+       			motor2.ChangeDutyCycle(speed)
        			self.motor1_reverse()
-       			motor1.ChangeDutyCycle(speed+3)
+       			motor1.ChangeDutyCycle(25)
     # The "d" key will toggle the steering right
 		if(char == "d"):
        			self.motor2_reverse()
-       			motor2.ChangeDutyCycle(speed+3)
+       			motor2.ChangeDutyCycle(25)
        			self.motor1_forward()
-       			motor1.ChangeDutyCycle(speed+3)
+       			motor1.ChangeDutyCycle(speed)
     # to save the next key that is pressed
 		char = ""
 
 # Program will cease all GPIO activity before terminating
-	def motor_clean_up():
+	def motor_clean_up(self):
 		io.cleanup()

@@ -13,6 +13,8 @@ motor2_in2_pin = 13
 stdby = 27
 motor1= None
 motor2= None
+speed=0
+direction1=0
 class Motors_Class:
 	def __init__(self):
 	    	global motor1_in1_pin
@@ -77,10 +79,13 @@ class Motors_Class:
 		global motor2_in2_pin
 		global motor1
 		global motor2
+		global direction1
+		global speed
+		direction1= direction
     # Keyboard character retrieval method is called and saved
     # into variable
     # The "x" key will break the loop and exit the program
-		char=direction	
+		char=direction1	
 	 	if(direction == "x"):
     			#print("Program Ended")
 			io.output(motor1_in1_pin, False)
@@ -106,18 +111,18 @@ class Motors_Class:
 		if(char == "a"):
         #toggleSteering("left")
 			self.motor2_forward()
-       			motor2.ChangeDutyCycle(speed+3)
+       			motor2.ChangeDutyCycle(speed)
        			self.motor1_reverse()
-       			motor1.ChangeDutyCycle(speed)
+       			motor1.ChangeDutyCycle(12)
     # The "d" key will toggle the steering right
 		if(char == "d"):
        			self.motor2_reverse()
-       			motor2.ChangeDutyCycle(speed)
+       			motor2.ChangeDutyCycle(12)
        			self.motor1_forward()
-       			motor1.ChangeDutyCycle(speed+3)
+       			motor1.ChangeDutyCycle(speed)
     # to save the next key that is pressed
 		char = ""
 
 # Program will cease all GPIO activity before terminating
-	def motor_clean_up():
+	def motor_clean_up(self):
 		io.cleanup()
